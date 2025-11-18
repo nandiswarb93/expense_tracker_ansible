@@ -60,7 +60,7 @@
 
     - name: Load backend schema
       ansible.builtin.command: >
-        mysql -h {{ mysql_host }} -uroot -pExpenseApp@1 < /app/schema/backend.sql
+        mysql -h mysql.nandiswar.fun -uroot -pExpenseApp@1 < /app/schema/backend.sql
 
     # ---------------- BACKEND SERVICE --------------------
     - name: Start backend service
