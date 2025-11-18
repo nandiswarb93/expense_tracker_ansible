@@ -3,7 +3,6 @@
   become: yes
 
   vars:
-  
     backend_zip_url: "https://expense-joindevops.s3.us-east-1.amazonaws.com/expense-backend-v2.zip"
 
   tasks:

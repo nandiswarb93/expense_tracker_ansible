@@ -3,7 +3,6 @@
   become: yes
 
   tasks:
-
     - name: Install nginx
       ansible.builtin.package:
         name: nginx
@@ -24,7 +23,7 @@
       ansible.builtin.file:
         path: /usr/share/nginx/html
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Download frontend application
       ansible.builtin.get_url:
@@ -46,26 +45,23 @@
       ansible.builtin.copy:
         src: expense.conf
         dest: /etc/nginx/default.d/expense.conf
-        mode: '0644'
+        mode: "0644"
 
     - name: Restart nginx
       ansible.builtin.service:
         name: nginx
         state: restarted
-
-
-
 # - name : configure frontend server
 #   hosts : frontend
 #   become : yes
-#   tasks : 
+#   tasks :
 #   - name : install nginx
-#     ansible.builtin.command : dnf install nginx -y 
+#     ansible.builtin.command : dnf install nginx -y
 
 #   - name : enable nginx
 #     ansible.builtin.command : systemctl enable nginx
 
-#   - name : start nginx 
+#   - name : start nginx
 #     ansible.builtin.command  : systemctl start nginx
 
 #   - name : remove html directory
@@ -73,7 +69,7 @@
 #     state : absent
 #     path :  /usr/share/nginx/html/*
 
-#   - name : download frontend application 
+#   - name : download frontend application
 #     ansible.builtin.get_url:
 #     url : curl -o /tmp/frontend.zip https://expense-joindevops.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
 #     dest : /tmp/frontend.zip
@@ -85,18 +81,18 @@
 #       remote_src : yes
 
 #   - name : delete default nginx configure
-#     ansible.builtin.file : 
+#     ansible.builtin.file :
 #       state : absent
 #       path : /etc/nginx/expense.conf
 
-#   - name : copy nginx conf 
-#     ansible.builtin.copy : 
-#       src : expense.conf 
+#   - name : copy nginx conf
+#     ansible.builtin.copy :
+#       src : expense.conf
 #       dest : /etc/nginx/default.d/expense.conf
 #       overwrite : yes
-  
+
 #   - name : restart nginx
-#     ansible.builtin.service : 
+#     ansible.builtin.service :
 #       name : nginx
 #       state : restarted
 #       enabled : yes

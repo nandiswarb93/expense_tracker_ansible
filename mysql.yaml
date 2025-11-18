@@ -3,7 +3,6 @@
   become: yes
 
   tasks:
-
     - name: Install MySQL Server 8.0
       ansible.builtin.package:
         name: mysql-server
@@ -33,4 +32,4 @@
       ansible.builtin.file:
         path: /var/lib/mysql/.mysql_root_password_set
         state: touch
-        mode: '0600'
+        mode: "0600"
