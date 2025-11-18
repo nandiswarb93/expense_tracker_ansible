@@ -8,6 +8,7 @@
     domain_name: "nandiswar.fun"
     instances : 
     - backend
+    - mysql
 
 
   tasks : 
