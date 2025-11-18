@@ -7,7 +7,8 @@
     zone_id: "Z0743285P8DPU280FJ3K"
     domain_name: "nandiswar.fun"
     instances : 
-    - frontend
+    - backend
+
 
   tasks : 
   - name : create ec2 instances
@@ -46,7 +47,7 @@
       value : "{{ item.instances[0].public_ip_address }}"
       overwrite : true
     when : item.item == "frontend"
-    loop : "{{ ec2_output.results}}"
+    loop : "{{ ec2_output.results }}"
 
 
 

@@ -1,0 +1,36 @@
+- name: Configure MySQL Server
+  hosts: mysql
+  become: yes
+
+  tasks:
+
+    - name: Install MySQL Server 8.0
+      ansible.builtin.package:
+        name: mysql-server
+        state: present
+
+    - name: Enable and start MySQL service
+      ansible.builtin.service:
+        name: mysqld
+        state: started
+        enabled: yes
+
+    # Optional: ensure MySQL is fully up (sometimes needs few seconds)
+    - name: Wait for MySQL socket
+      ansible.builtin.wait_for:
+        path: /var/lib/mysql/mysql.sock
+        state: present
+        timeout: 30
+
+    - name: Set MySQL root password using mysql_secure_installation
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1"
+      args:
+        creates: /var/lib/mysql/.mysql_root_password_set
+      register: mysql_secure
+      changed_when: "'... Success!' in mysql_secure.stdout or 'already' in mysql_secure.stdout"
+
+    - name: Mark password as configured
+      ansible.builtin.file:
+        path: /var/lib/mysql/.mysql_root_password_set
+        state: touch
+        mode: '0600'
